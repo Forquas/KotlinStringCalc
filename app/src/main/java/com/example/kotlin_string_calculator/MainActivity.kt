@@ -108,8 +108,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "+")
             R.id.buttonDot ->
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
-            R.id.buttonEquals ->
+            R.id.buttonEquals ->{
                 myTextView.text = calculator.equalsCalc(myTextView.text as String)
+            }
         }
     }
 }
