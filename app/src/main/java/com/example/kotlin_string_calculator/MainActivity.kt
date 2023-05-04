@@ -26,6 +26,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var buttonMinus : Button
     lateinit var buttonDot : Button
     lateinit var buttonEquals : Button
+    lateinit var buttonClear : Button
+    lateinit var buttonProc : Button
+    lateinit var buttonParenth : Button
+    lateinit var buttonDel : Button
 
     lateinit var myTextView: TextView
     lateinit var calculator: Calculator
@@ -55,6 +59,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         buttonDot.setOnClickListener(this)
         buttonMulti.setOnClickListener(this)
         buttonDiv.setOnClickListener(this)
+        buttonClear.setOnClickListener(this)
+        buttonProc.setOnClickListener(this)
+        buttonParenth.setOnClickListener(this)
+        buttonDel.setOnClickListener(this)
 
     }
     fun startUpButton(){
@@ -74,6 +82,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         buttonMulti = findViewById(R.id.buttonMulti)
         buttonDot = findViewById(R.id.buttonDot)
         buttonDiv = findViewById(R.id.buttonDiv)
+        buttonClear = findViewById(R.id.buttonClear)
+        buttonProc = findViewById(R.id.buttonProc)
+        buttonParenth = findViewById(R.id.buttonParenth)
+        buttonDel = findViewById(R.id.buttonDel)
     }
 
     override fun onClick(v: View) {
@@ -111,6 +123,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonEquals ->{
                 myTextView.text = calculator.equalsCalc(myTextView.text as String)
             }
+            R.id.buttonClear ->
+                myTextView.text = calculator.clearCalc()
+            R.id.buttonProc ->
+                myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
+            R.id.buttonParenth ->
+                myTextView.text = calculator.updateCalc(myTextView.text as String, "(-3)")
+            R.id.buttonDel ->
+                myTextView.text = calculator.delCalc(myTextView.text as String)
+
+
         }
     }
 }

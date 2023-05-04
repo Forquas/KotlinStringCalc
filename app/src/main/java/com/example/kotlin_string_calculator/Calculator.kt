@@ -7,6 +7,14 @@ class Calculator() {
 
     fun updateCalc(initString: String,value: String): String = initString + value
 
+    fun delCalc(initString: String): String {
+        var ans = ""
+        if(initString.isNotEmpty())
+            ans = initString.substring(0,initString.length-1)
+        return ans
+    }
+    fun clearCalc(): String = ""
+
     private fun untilPlus(numArray: List<String>,opeArray: List<String>): Int{
         val numbers = numArray
         val ops = opeArray
