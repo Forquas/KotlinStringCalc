@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonProc ->
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
             R.id.buttonParenth ->
-                myTextView.text = calculator.updateCalc(myTextView.text as String, "(-3)")
+                myTextView.text = calculator.updateCalc(myTextView.text as String, "()")
             R.id.buttonDel ->
                 myTextView.text = calculator.delCalc(myTextView.text as String)
 

@@ -1,5 +1,6 @@
 package com.example.kotlin_string_calculator
 
+import android.text.BoringLayout
 import android.util.Log
 import kotlin.math.log
 
@@ -15,7 +16,10 @@ class Calculator() {
     }
     fun clearCalc(): String = ""
 
+    private fun checkFirstMinus(passedString: String): Boolean = (passedString[0] == '-')
+
     private fun untilPlus(numArray: List<String>,opeArray: List<String>): Int{
+
         val numbers = numArray
         val ops = opeArray
         var newNumbers: MutableList<String>
@@ -122,8 +126,12 @@ class Calculator() {
 
     fun equalsCalc(passedString: String): String{
 
-        var numbers = equalsListNumFunFirst(passedString)
-        var ops = equalsListOpeFunFirst(passedString)
+        val parenthCheck = checkFirstMinus(passedString)
+        Log.i("lol", "equalsCalc: $parenthCheck")
+        var numbers = equalsListNumFunFirst(passedString,parenthCheck)
+        var ops = equalsListOpeFunFirst(passedString,parenthCheck)
+
+
         Log.i("lol", "equalsCalc: numbers count ${numbers.count()}")
         Log.i("lol", "equalsCalc: numbers are $numbers")
         Log.i("lol", "equalsCalc: ops count ${ops.count()}")
@@ -132,19 +140,35 @@ class Calculator() {
         return ats.toString()
     }
 
-    private fun equalsListNumFunFirst(passedString: String): List<String> {
+    private fun equalsListNumFunFirst(passedString: String,parenthCheck: Boolean): List<String> {
         val plusSplitter = "+"
         val minusSplitter = "-"
         val divSplitter = "/"
         val multiSplitter = "X"
         val equalSpliiter = "="
-        return passedString.trim().split(plusSplitter,minusSplitter,divSplitter,
-            multiSplitter,equalSpliiter)
+        var tempList: MutableList<String> =
+            passedString.trim().split(plusSplitter,minusSplitter,divSplitter,
+                multiSplitter,equalSpliiter) as MutableList<String>
+        tempList = tempList.filter { it.isNotEmpty() } as MutableList<String>
+        Log.i("lol", "equalsListNumFunFirst:temp list 1 $tempList")
+        if(parenthCheck)tempList[0] = tempList[0].toInt().times(-1).toString()
+        Log.i("lol", "equalsListNumFunFirst:temp list 2 $tempList")
+        val returnableList: List<String> = tempList
+        Log.i("lol", "equalsListNumFunFirst: returnable $returnableList")
+        return returnableList
     }
-    private fun equalsListOpeFunFirst(passedString: String): List<String> {
+    private fun equalsListOpeFunFirst(passedString: String,parenthCheck:Boolean): List<String> {
         val splittedArrayOperatorsBegin = passedString.split(
             "1","2","3","4","5","6","7","8","9","0").map { it.trim()}
-        return splittedArrayOperatorsBegin.filter { it.isNotEmpty() }
+        Log.i("lol", "equalsListOpeFunFirst:temp list 1 $splittedArrayOperatorsBegin")
+        val tempList: MutableList<String> =
+            splittedArrayOperatorsBegin.filter { it.isNotEmpty() } as MutableList<String>
+        Log.i("lol", "equalsListOpeFunFirst:temp list 2 $tempList")
+        if(parenthCheck) tempList.removeAt(0)
+        Log.i("lol", "equalsListOpeFunFirst:temp list 3 after removal $tempList")
+        val returnableList: List<String> = tempList
+        Log.i("lol", "equalsListOpeFunFirst: returnable $returnableList")
+        return returnableList
     }
 }
 
