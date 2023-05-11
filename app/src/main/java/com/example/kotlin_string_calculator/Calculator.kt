@@ -8,6 +8,22 @@ class Calculator() {
 
     fun updateCalc(initString: String,value: String): String = initString + value
 
+    fun equalsCalc(passedString: String,parenthCount: Int): String{
+
+        val parenthCheck = checkFirstMinus(passedString)
+        Log.i("lol", "equalsCalc: $parenthCheck")
+        var numbers = equalsListNumFunFirst(passedString,parenthCheck)
+        var ops = equalsListOpeFunFirst(passedString,parenthCheck)
+
+
+        Log.i("lol", "equalsCalc: numbers count ${numbers.count()}")
+        Log.i("lol", "equalsCalc: numbers are $numbers")
+        Log.i("lol", "equalsCalc: ops count ${ops.count()}")
+        Log.i("lol", "equalsCalc: ops : $ops")
+        val ats = untilPlus(numbers,ops)
+        return ats.toString()
+    }
+
     fun delCalc(initString: String): String {
         var ans = ""
         if(initString.isNotEmpty())
@@ -124,21 +140,7 @@ class Calculator() {
 
 
 
-    fun equalsCalc(passedString: String): String{
 
-        val parenthCheck = checkFirstMinus(passedString)
-        Log.i("lol", "equalsCalc: $parenthCheck")
-        var numbers = equalsListNumFunFirst(passedString,parenthCheck)
-        var ops = equalsListOpeFunFirst(passedString,parenthCheck)
-
-
-        Log.i("lol", "equalsCalc: numbers count ${numbers.count()}")
-        Log.i("lol", "equalsCalc: numbers are $numbers")
-        Log.i("lol", "equalsCalc: ops count ${ops.count()}")
-        Log.i("lol", "equalsCalc: ops : $ops")
-        val ats = untilPlus(numbers,ops)
-        return ats.toString()
-    }
 
     private fun equalsListNumFunFirst(passedString: String,parenthCheck: Boolean): List<String> {
         val plusSplitter = "+"

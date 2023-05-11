@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var myTextView: TextView
     lateinit var calculator: Calculator
+    var parenthBool : Boolean = false
+    var parenthCount : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
+
         when(v.id){
             R.id.button0 ->
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "0")
@@ -121,14 +124,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonDot ->
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
             R.id.buttonEquals ->{
-                myTextView.text = calculator.equalsCalc(myTextView.text as String)
+                myTextView.text = calculator.equalsCalc(myTextView.text as String,parenthCount)
+                parenthCount = 0
             }
             R.id.buttonClear ->
                 myTextView.text = calculator.clearCalc()
             R.id.buttonProc ->
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
             R.id.buttonParenth ->
-                myTextView.text = calculator.updateCalc(myTextView.text as String, "()")
+                if(parenthBool){
+                    myTextView.text = calculator.updateCalc(myTextView.text as String, ")")
+                    parenthBool = false
+                    parenthCount++
+                    Log.i("lol", "onClick: $parenthCount")
+                }
+                else{
+                    myTextView.text = calculator.updateCalc(myTextView.text as String, "(")
+                    parenthBool = true
+                }
+
             R.id.buttonDel ->
                 myTextView.text = calculator.delCalc(myTextView.text as String)
 
