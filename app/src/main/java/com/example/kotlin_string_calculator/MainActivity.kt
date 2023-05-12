@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var parenthBool : Boolean = false
     var parenthCount : Int = 0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -94,59 +93,125 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         when(v.id){
             R.id.button0 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "0")
             R.id.button1 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "1")
             R.id.button2 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "2")
             R.id.button3 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "3")
             R.id.button4 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "4")
             R.id.button5 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "5")
             R.id.button6 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "6")
             R.id.button7 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "7")
             R.id.button8 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "8")
             R.id.button9 ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "9")
             R.id.buttonMulti ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "X")
             R.id.buttonDiv ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "/")
             R.id.buttonMinus ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "-")
             R.id.buttonPlus ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, "+")
             R.id.buttonDot ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
             R.id.buttonEquals ->{
-                myTextView.text = calculator.equalsCalc(myTextView.text as String,parenthCount)
-                parenthCount = 0
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                    parenthCount = 0
+                    parenthBool = false
+                }else {
+                    if (parenthBool) {
+                        myTextView.text = "ERROR" as String
+                    } else {
+                        myTextView.text =
+                            calculator.equalsCalc(myTextView.text as String, parenthCount)
+                        parenthCount = 0
+                        parenthBool = false
+                    }
+                }
             }
             R.id.buttonClear ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.clearCalc()
             R.id.buttonProc ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.updateCalc(myTextView.text as String, ".")
             R.id.buttonParenth ->
-                if(parenthBool){
-                    myTextView.text = calculator.updateCalc(myTextView.text as String, ")")
-                    parenthBool = false
-                    parenthCount++
-                    Log.i("lol", "onClick: $parenthCount")
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else {
+                    if (parenthBool) {
+                        myTextView.text = calculator.updateCalc(myTextView.text as String, ")")
+                        parenthBool = false
+                        parenthCount++
+                        Log.i("lol", "onClick: $parenthCount")
+                    } else {
+                        myTextView.text = calculator.updateCalc(myTextView.text as String, "(")
+                        parenthBool = true
+                    }
                 }
-                else{
-                    myTextView.text = calculator.updateCalc(myTextView.text as String, "(")
-                    parenthBool = true
-                }
-
             R.id.buttonDel ->
+                if(myTextView.text == "ERROR"){
+                    myTextView.text = calculator.clearCalc()
+                }else
                 myTextView.text = calculator.delCalc(myTextView.text as String)
-
-
         }
     }
 }

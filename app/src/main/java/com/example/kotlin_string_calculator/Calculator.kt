@@ -15,7 +15,6 @@ class Calculator() {
         var numbers = equalsListNumFunFirst(passedString,parenthCheck)
         var ops = equalsListOpeFunFirst(passedString,parenthCheck)
 
-
         Log.i("lol", "equalsCalc: numbers count ${numbers.count()}")
         Log.i("lol", "equalsCalc: numbers are $numbers")
         Log.i("lol", "equalsCalc: ops count ${ops.count()}")
@@ -31,6 +30,7 @@ class Calculator() {
         return ans
     }
     fun clearCalc(): String = ""
+
 
     private fun checkFirstMinus(passedString: String): Boolean = (passedString[0] == '-')
 
